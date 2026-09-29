@@ -13,8 +13,13 @@
 <script>
   // 홈 화면 아이콘으로 열면(?open) 바로 앱으로. 설치 안내로 열면 주소에 ?open 을 붙여 두어 아이폰 「홈 화면에 추가」도 ?open 으로 저장되게
   var APP = 'https://script.google.com/a/macros/gscsupport.org/s/AKfycbyXpPF1653Jcdb7gTh4Efq5zx_-NSma935vyzxfqtKJZkl9aTMh83iYis9wJRcfE9nD/exec';
-  if (/[?&]open\b/.test(location.search)) location.replace(APP);
-  else if (history.replaceState) history.replaceState(null, '', location.pathname + '?open');
+  // 카카오톡 안 브라우저는 홈 화면 추가 · 설치가 없음 → 카카오톡의 「외부 브라우저로 열기」로 크롬 · 사파리에서 다시 연다
+  var UA = navigator.userAgent || '';
+  var KAKAO = /KAKAOTALK/i.test(UA);
+  var INAPP = KAKAO || /NAVER\(inapp|Instagram|FBAN|FBAV|Line\/|DaumApps|everytimeApp/i.test(UA);
+  if (KAKAO && !/[?&]open\b/.test(location.search)) location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(location.origin + location.pathname);
+  else if (/[?&]open\b/.test(location.search)) location.replace(APP);
+  else if (history.replaceState && !INAPP) history.replaceState(null, '', location.pathname + '?open');
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () { });
 </script>
 <style>
@@ -34,12 +39,14 @@
   .how ol { margin: 0 0 6px; padding-left: 20px; }
   .ok { color: #1c6b3d; font-weight: 700; margin-top: 10px; }
   .note { color: #7b8794; font-size: 12.5px; margin-top: 14px; }
+  .inapp { background: #fff4d6; border: 1px solid #f0c36a; color: #6b4b00; border-radius: 12px; padding: 12px 14px; font-size: 14.5px; line-height: 1.6; margin-bottom: 16px; text-align: left; }
   [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="steps"><span class="on">① 나에안식</span><span class="">② 차량일지</span></div>
+  <div class="inapp" id="inapp" hidden>⚠️ 지금은 <b>카카오톡 · 다른 앱 안</b>에서 열려 있어 설치가 안 돼요.<br>오른쪽 위(또는 아래) <b>⋮ · … 메뉴 → 「다른 브라우저로 열기」</b>를 눌러 <b>크롬(아이폰은 사파리)</b>에서 열어 주세요.</div>
   <img class="ic" src="icon-192.png" alt="">
   <h1>나에안식</h1>
   <p class="sub">나에안식 잠실 통합업무시스템</p>
@@ -58,6 +65,7 @@
 </div>
 <script>
   // 안드로이드 크롬: 설치 버튼 한 번으로 홈 화면에 (브라우저가 허락할 때만 버튼이 보임). 설치되면 다음 단계로
+  if (INAPP) document.getElementById('inapp').hidden = false;   // 카카오톡이 외부 브라우저로 못 넘겼거나 다른 앱 안일 때
   var ask = null;
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); ask = e; document.getElementById('inst').hidden = false; });
   document.getElementById('inst').onclick = function () {
