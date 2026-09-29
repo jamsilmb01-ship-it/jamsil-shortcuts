@@ -1,0 +1,21 @@
+{
+  "name": "나에안식 차량 운행일지",
+  "short_name": "차량일지",
+  "start_url": "./?open",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#257a4a",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
