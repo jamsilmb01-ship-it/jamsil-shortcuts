@@ -3,47 +3,73 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>나에안식 잠실 통합업무시스템</title>
-<meta name="apple-mobile-web-app-title" content="통합업무">
-<meta name="application-name" content="통합업무">
+<title>나에안식</title>
+<meta name="apple-mobile-web-app-title" content="나에안식">
+<meta name="application-name" content="나에안식">
 <meta name="theme-color" content="#1f4e79">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
 <script>
-  // 홈 화면 아이콘으로 열면(?open) 바로 앱으로. 이 안내 페이지를 처음 열면 주소에 ?open 을 붙여 두어,
-  // 아이폰 「홈 화면에 추가」도 ?open 주소로 저장되게 한다 (안드로이드는 manifest 의 start_url)
+  // 홈 화면 아이콘으로 열면(?open) 바로 앱으로. 설치 안내로 열면 주소에 ?open 을 붙여 두어 아이폰 「홈 화면에 추가」도 ?open 으로 저장되게
   var APP = 'https://script.google.com/a/macros/gscsupport.org/s/AKfycbyXpPF1653Jcdb7gTh4Efq5zx_-NSma935vyzxfqtKJZkl9aTMh83iYis9wJRcfE9nD/exec';
   if (/[?&]open\b/.test(location.search)) location.replace(APP);
   else if (history.replaceState) history.replaceState(null, '', location.pathname + '?open');
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () { });
 </script>
 <style>
   body { font-family: -apple-system, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; margin: 0; background: #f4f6f9; color: #1f2933; }
-  .wrap { max-width: 460px; margin: 0 auto; padding: 28px 18px 40px; text-align: center; }
-  img.ic { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 4px 14px rgba(0,0,0,.15); }
-  h1 { font-size: 22px; margin: 14px 0 4px; }
-  .sub { color: #5b6773; font-size: 14px; margin: 0 0 20px; }
-  a.go { display: block; background: #1f4e79; color: #fff; text-decoration: none; font-weight: 700; font-size: 17px; padding: 14px; border-radius: 12px; }
-  .how { text-align: left; background: #fff; border: 1px solid #dde3ea; border-radius: 12px; padding: 12px 16px; margin-top: 18px; font-size: 14.5px; line-height: 1.6; }
-  .how h2 { font-size: 15px; margin: 6px 0 4px; }
+  .wrap { max-width: 460px; margin: 0 auto; padding: 24px 18px 40px; text-align: center; }
+  .steps { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; font-size: 13px; }
+  .steps span { padding: 4px 12px; border-radius: 999px; background: #e3e8ee; color: #5b6773; }
+  .steps span.on { background: #1f4e79; color: #fff; font-weight: 700; }
+  .steps span.done { background: #c8ead6; color: #1c6b3d; }
+  img.ic { width: 104px; height: 104px; border-radius: 24px; box-shadow: 0 4px 14px rgba(0,0,0,.15); }
+  h1 { font-size: 23px; margin: 12px 0 4px; }
+  .sub { color: #5b6773; font-size: 14px; margin: 0 0 18px; }
+  button.go, a.go { display: block; width: 100%; box-sizing: border-box; background: #1f4e79; color: #fff; border: 0; text-decoration: none; font-weight: 700; font-size: 18px; padding: 15px; border-radius: 12px; cursor: pointer; }
+  a.next { display: block; margin-top: 10px; padding: 13px; border-radius: 12px; border: 2px solid #1f4e79; color: #1f4e79; font-weight: 700; text-decoration: none; }
+  .how { text-align: left; background: #fff; border: 1px solid #dde3ea; border-radius: 12px; padding: 12px 16px; margin-top: 16px; font-size: 14.5px; line-height: 1.6; }
+  .how h2 { font-size: 15px; margin: 4px 0 2px; }
   .how ol { margin: 0 0 6px; padding-left: 20px; }
+  .ok { color: #1c6b3d; font-weight: 700; margin-top: 10px; }
   .note { color: #7b8794; font-size: 12.5px; margin-top: 14px; }
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="steps"><span class="on">① 나에안식</span><span class="">② 차량일지</span></div>
   <img class="ic" src="icon-192.png" alt="">
-  <h1>나에안식 잠실 통합업무시스템</h1>
-  <p class="sub">휴대폰 홈 화면에 아이콘으로 저장해 두세요.</p>
-  <a class="go" href="https://script.google.com/a/macros/gscsupport.org/s/AKfycbyXpPF1653Jcdb7gTh4Efq5zx_-NSma935vyzxfqtKJZkl9aTMh83iYis9wJRcfE9nD/exec">지금 열기</a>
-  <div class="how">
-    <h2>📱 안드로이드 (크롬)</h2>
-    <ol><li>오른쪽 위 <b>⋮</b> 누르기</li><li><b>「홈 화면에 추가」</b>(또는 「앱 설치」) → <b>추가</b></li></ol>
-    <h2>🍎 아이폰 (사파리)</h2>
-    <ol><li>아래 가운데 <b>공유 버튼(□↑)</b> 누르기</li><li><b>「홈 화면에 추가」</b> → 오른쪽 위 <b>추가</b></li></ol>
-    홈 화면의 <b>「통합업무」</b> 아이콘을 누르면 바로 열립니다.
+  <h1>나에안식</h1>
+  <p class="sub">나에안식 잠실 통합업무시스템</p>
+  <button type="button" class="go" id="inst" hidden>📲 홈 화면에 설치</button>
+  <div class="ok" id="done" hidden>✅ 설치했어요!</div>
+  <a class="next" href="https://jamsilmb01-ship-it.github.io/jamsil-shortcuts/car/">다음 ② 차량일지 설치 →</a>
+  <div class="how" id="manual">
+    <h2>📱 버튼이 안 보이면 (아이폰 · 다른 브라우저)</h2>
+    <ol>
+      <li>아이폰 사파리: 아래 가운데 <b>공유(□↑)</b> → <b>「홈 화면에 추가」</b> → <b>추가</b></li>
+      <li>안드로이드: 오른쪽 위 <b>⋮</b> → <b>「홈 화면에 추가」</b>(또는 「앱 설치」)</li>
+    </ol>
+    그다음 위의 <b>다음 ② 차량일지 설치 →</b>을 누르세요.
   </div>
   <p class="note">기관 계정(gscsupport.org)으로 로그인해야 열립니다. 이 페이지는 앱으로 넘겨 주기만 하고 아무것도 저장하지 않습니다.</p>
 </div>
+<script>
+  // 안드로이드 크롬: 설치 버튼 한 번으로 홈 화면에 (브라우저가 허락할 때만 버튼이 보임). 설치되면 다음 단계로
+  var ask = null;
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); ask = e; document.getElementById('inst').hidden = false; });
+  document.getElementById('inst').onclick = function () {
+    if (!ask) return;
+    ask.prompt();
+    ask.userChoice.then(function (c) { if (c && c.outcome === 'accepted') installed(); ask = null; document.getElementById('inst').hidden = true; });
+  };
+  window.addEventListener('appinstalled', installed);
+  function installed() {
+    document.getElementById('done').hidden = false;
+    setTimeout(function () { location.href = 'https://jamsilmb01-ship-it.github.io/jamsil-shortcuts/car/'; }, 1500);
+  }
+</script>
 </body>
 </html>
