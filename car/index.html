@@ -53,19 +53,49 @@
   <button type="button" class="go" id="inst" hidden>📲 홈 화면에 설치</button>
   <div class="ok" id="done" hidden>✅ 설치했어요!</div>
   <a class="next" href="https://jamsilmb01-ship-it.github.io/jamsil-shortcuts/jamsil/">← ① 나에안식으로 돌아가기</a>
+  <!-- 버튼이 안 보일 때: 브라우저마다 방법이 달라 지금 연 브라우저 것만 보여 줌 (2026-09-30, 갤럭시 기본 「삼성 인터넷」에서 안 된다는 말) -->
   <div class="how" id="manual">
-    <h2>📱 버튼이 안 보이면 (아이폰 · 다른 브라우저)</h2>
-    <ol>
-      <li>아이폰 사파리: 아래 가운데 <b>공유(□↑)</b> → <b>「홈 화면에 추가」</b> → <b>추가</b></li>
-      <li>안드로이드: 오른쪽 위 <b>⋮</b> → <b>「홈 화면에 추가」</b>(또는 「앱 설치」)</li>
-    </ol>
+    <h2>📱 버튼이 안 보이면</h2>
+    <div data-b="samsung" hidden>
+      <b>갤럭시 「삼성 인터넷」</b>으로 열려 있어요.
+      <ol>
+        <li>아래 오른쪽 <b>≡ 메뉴</b> → <b>「현재 페이지 추가」</b> → <b>「홈 화면」</b> → <b>추가</b></li>
+        <li>또는 크롬으로 열어 [📲 홈 화면에 설치] 버튼 쓰기 → <a href="#" id="toChrome"><b>크롬으로 열기</b></a></li>
+      </ol>
+    </div>
+    <div data-b="chrome" hidden>
+      <ol>
+        <li>오른쪽 위 <b>⋮</b> → <b>「홈 화면에 추가」</b> 또는 <b>「앱 설치」</b> → <b>설치(추가)</b></li>
+        <li>메뉴에 없으면 <b>크롬을 최신으로 업데이트</b>(플레이 스토어)한 뒤 다시 열어 주세요</li>
+      </ol>
+    </div>
+    <div data-b="ios" hidden>
+      <ol>
+        <li>사파리: 아래 가운데 <b>공유(□↑)</b> → <b>「홈 화면에 추가」</b> → <b>추가</b></li>
+        <li>아이폰 크롬: 주소창 오른쪽 <b>공유(□↑)</b> → <b>「홈 화면에 추가」</b></li>
+      </ol>
+    </div>
+    <div data-b="other" hidden>
+      <ol>
+        <li>안드로이드: 메뉴(⋮ 또는 ≡) → <b>「홈 화면에 추가」</b> · <b>「현재 페이지 추가」</b></li>
+        <li>아이폰: <b>공유(□↑)</b> → <b>「홈 화면에 추가」</b></li>
+      </ol>
+    </div>
     그다음 위의 <b>← ① 나에안식으로 돌아가기</b>을 누르세요.
+    <p class="note" style="text-align:left">그래도 안 되면: <a href="https://script.google.com/a/macros/gscsupport.org/s/AKfycbyWBPOMTDsHJAvTrzyhhL7ucnZKRUTfi-W0Df4ViefqFMfe-RC5YSUxYCw4vDWI7NHUTw/exec"><b>앱을 바로 열고</b></a> 그 화면에서 같은 메뉴로 「홈 화면에 추가」 하세요. 아이콘 모양만 다르고 똑같이 쓸 수 있어요.</p>
   </div>
   <p class="note">기관 계정(gscsupport.org)으로 로그인해야 열립니다. 이 페이지는 앱으로 넘겨 주기만 하고 아무것도 저장하지 않습니다.</p>
 </div>
 <script>
   // 안드로이드 크롬: 설치 버튼 한 번으로 홈 화면에 (브라우저가 허락할 때만 버튼이 보임). 설치되면 다음 단계로
   if (INAPP) document.getElementById('inapp').hidden = false;   // 카카오톡이 외부 브라우저로 못 넘겼거나 다른 앱 안일 때
+  var BR = /SamsungBrowser/i.test(UA) ? 'samsung' : /iPhone|iPad|iPod/i.test(UA) ? 'ios' : /Android/i.test(UA) && /Chrome\//.test(UA) ? 'chrome' : 'other';
+  document.querySelector('[data-b="' + BR + '"]').hidden = false;
+  // 삼성 인터넷 → 크롬으로 같은 페이지 열기 (크롬이 없으면 플레이 스토어로)
+  document.getElementById('toChrome').onclick = function (e) {
+    e.preventDefault();
+    location.href = 'intent://' + location.host + location.pathname + '#Intent;scheme=https;package=com.android.chrome;end';
+  };
   var ask = null;
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); ask = e; document.getElementById('inst').hidden = false; });
   document.getElementById('inst').onclick = function () {
