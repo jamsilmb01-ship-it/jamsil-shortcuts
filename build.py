@@ -5,7 +5,7 @@ BASE = 'https://jamsilmb01-ship-it.github.io/jamsil-shortcuts/'
 APPS = {
   'jamsil': {'TITLE': '나에안식 잠실 통합업무시스템', 'SHORT': '나에안식', 'COLOR': '#1f4e79', 'S1': 'on', 'S2': '',
              'NEXT': BASE + 'car/', 'NEXTLABEL': '다음 ② 차량일지 설치 →', 'AFTER': "setTimeout(function () { location.href = '" + BASE + "car/'; }, 1500);",
-             'URL': 'https://script.google.com/a/macros/gscsupport.org/s/AKfycbyXpPF1653Jcdb7gTh4Efq5zx_-NSma935vyzxfqtKJZkl9aTMh83iYis9wJRcfE9nD/exec'},
+             'URL': 'https://jamsil-integrated.pages.dev/'},
   'car':    {'TITLE': '나에안식 차량 운행일지', 'SHORT': '차량일지', 'COLOR': '#257a4a', 'S1': 'done', 'S2': 'on',
              'NEXT': BASE + 'jamsil/', 'NEXTLABEL': '← ① 나에안식으로 돌아가기', 'AFTER': "document.querySelector('.steps span.on').className = 'done';",
              'URL': 'https://script.google.com/a/macros/gscsupport.org/s/AKfycbyWBPOMTDsHJAvTrzyhhL7ucnZKRUTfi-W0Df4ViefqFMfe-RC5YSUxYCw4vDWI7NHUTw/exec'},
