@@ -8,7 +8,7 @@ APPS = {
              'URL': 'https://jamsil-integrated.pages.dev/'},
   'car':    {'TITLE': '나에안식 차량 운행일지', 'SHORT': '차량일지', 'COLOR': '#257a4a', 'S1': 'done', 'S2': 'on',
              'NEXT': BASE + 'jamsil/', 'NEXTLABEL': '← ① 나에안식으로 돌아가기', 'AFTER': "document.querySelector('.steps span.on').className = 'done';",
-             'URL': 'https://script.google.com/a/macros/gscsupport.org/s/AKfycbyWBPOMTDsHJAvTrzyhhL7ucnZKRUTfi-W0Df4ViefqFMfe-RC5YSUxYCw4vDWI7NHUTw/exec'},
+             'URL': 'https://jamsil-integrated.pages.dev/car'},   # 2026-10-18 차량 운행일지가 업무 앱 안으로 (옛 아이콘도 /car 로)
 }
 tpl = open('page.tpl', encoding='utf-8').read()
 for k, c in APPS.items():
