@@ -5,10 +5,10 @@ BASE = 'https://jamsilmb01-ship-it.github.io/jamsil-shortcuts/'
 APPS = {
   'jamsil': {'TITLE': '나에안식 잠실 통합업무시스템', 'SHORT': '나에안식', 'COLOR': '#1f4e79', 'S1': 'on', 'S2': '',
              'NEXT': BASE + 'car/', 'NEXTLABEL': '다음 ② 차량일지 설치 →', 'AFTER': "setTimeout(function () { location.href = '" + BASE + "car/'; }, 1500);",
-             'URL': 'https://jamsil-integrated.pages.dev/'},
+             'URL': 'https://naeansik.pages.dev/'},
   'car':    {'TITLE': '나에안식 차량 운행일지', 'SHORT': '차량일지', 'COLOR': '#257a4a', 'S1': 'done', 'S2': 'on',
              'NEXT': BASE + 'jamsil/', 'NEXTLABEL': '← ① 나에안식으로 돌아가기', 'AFTER': "document.querySelector('.steps span.on').className = 'done';",
-             'URL': 'https://jamsil-integrated.pages.dev/car'},   # 2026-10-18 차량 운행일지가 업무 앱 안으로 (옛 아이콘도 /car 로)
+             'URL': 'https://naeansik.pages.dev/car'},   # 2026-10-18 차량 운행일지가 업무 앱 안으로 (옛 아이콘도 /car 로)
 }
 tpl = open('page.tpl', encoding='utf-8').read()
 for k, c in APPS.items():
